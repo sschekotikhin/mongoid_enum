@@ -207,11 +207,11 @@ module Mongoid # :nodoc:
 
               # def active!() update! status: :active end
               klass.send(:detect_enum_conflict!, name, "#{value_method_name}!")
-              define_method("#{value_method_name}!") { update! name => key }
+              define_method("#{value_method_name}!") { update!(name => key) }
 
               # scope :active, -> { where status: 0 }
               klass.send(:detect_enum_conflict!, name, scope_name, true)
-              klass.scope scope_name, -> { klass.where name => key }
+              klass.scope scope_name, -> { klass.where(name => key) }
             end
           end
 
