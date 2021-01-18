@@ -203,7 +203,7 @@ module Mongoid # :nodoc:
 
               # def active?() status == 0 end
               klass.send(:detect_enum_conflict!, name, "#{value_method_name}?")
-              define_method("#{value_method_name}?") { self[name] == value }
+              define_method("#{value_method_name}?") { self[name].to_s == value.to_s }
 
               # def active!() update! status: :active end
               klass.send(:detect_enum_conflict!, name, "#{value_method_name}!")
