@@ -8,6 +8,14 @@ task :clean_log do
   File.unlink "log/test.log" if File.exist? "log/test.log"
 end
 
+# fix for NoMethodError: undefined method `last_comment'
+module LastComment
+  def last_comment
+    last_description
+  end 
+end
+Rake::Application.send :include, LastComment
+
 Rake::TestTask.new test: :clean_log do |t|
   t.libs << "test"
   t.pattern = "test/**/*_test.rb"
